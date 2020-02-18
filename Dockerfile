@@ -1,11 +1,10 @@
 FROM ubuntu:18.04
 USER root
 
-ENV DEBIAN_FRONTEND=noninteractive
-ENV GOVERSION=1.13.8
-ENV GOPATH=$HOME/go
-ENV GOENV_ROOT=$HOME/.goenv
-ENV PATH=bin:$GOENV_ROOT/bin:$GOPATH/bin:$PATH
+ENV GOVERSION 1.13.8
+ENV GOPATH $HOME/go
+ENV GOENV_ROOT $HOME/.goenv
+ENV PATH bin:$GOENV_ROOT/bin:$GOPATH/bin:$PATH
 
 
 RUN apt-get -qq update && \
@@ -16,6 +15,7 @@ RUN goenv init -
 RUN goenv install $GOVERSION
 
 RUN apt clean && rm -rf /var/lib/apt/lists/*
+RUN go version
 
 ARG workspace=/app/
 WORKDIR $workspace
